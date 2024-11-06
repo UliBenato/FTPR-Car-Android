@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "803329811406",
+    "project_id": "carapi-a8c5b",
+    "storage_bucket": "carapi-a8c5b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:803329811406:android:11df12169fe09af01a819f",
+        "android_client_info": {
+          "package_name": "com.example.myapitest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "803329811406-nqe715gceenn8rhf76ouee8ilel74l1f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapitest",
+            "certificate_hash": "5316977eac43830bff3fe53dc64b49ee5ab37a29"
+          }
+        },
+        {
+          "client_id": "803329811406-7n52uaiti7gno9hin4mecgteakvjbo6p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUQtlK3x-SXvLxTpPqHJbzCuXbsbKsk8M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "803329811406-7n52uaiti7gno9hin4mecgteakvjbo6p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

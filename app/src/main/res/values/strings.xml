@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">MyApiTest - COLOQUE O SEU NOME AQUI</string>
+    <string name="app_name">MyApiTest - ULIANA</string>
+    <string name="hint_cellphone">+55 11 91234-5678</string>
+    <string name="code_brazil">+55</string>
+    <string name="send_sms">Enviar SMS</string>
+    <string name="hint_verify_sms">101010</string>
+    <string name="verify_sms">Verificar SMS</string>
+    <string name="year">%1$s anos</string>
+    <string name="denied_permission">Permissão negada!</string>
+    <string name="error_validate_form">Por favor preencha o campo: %1$s</string>
+    <string name="error_create">Erro ao salvar carro!</string>
+    <string name="success_create">Item %1$s criado com sucesso!!</string>
+    <string name="logout">Logout</string>
+    <string name="unknow_error">Erro</string>
 </resources>
