@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
             fetchItems()
         }
         binding.addCta.setOnClickListener{
-            //startActivity(NewCarActivity.newIntent(this))
+            startActivity(NewCarActivity.newIntent(this))
         }
     }
 

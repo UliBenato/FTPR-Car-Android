@@ -8,32 +8,28 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.myapitest.databinding.ActivityCarDetailBinding
-import com.example.myapitest.databinding.ActivityLoginBinding
 import com.example.myapitest.model.Car
 import com.example.myapitest.services.Result
 import com.example.myapitest.services.RetrofitClient
 import com.example.myapitest.services.safeApiCall
 import com.example.myapitest.ui.loadUrl
-import com.google.android.gms.maps.GoogleMap
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import com.google.android.gms.maps.GoogleMap
 
 class CarDetailActivity : AppCompatActivity() {
 
-    private lateinit var car: Car
-    private lateinit var mMap: GoogleMap
-
     private lateinit var binding: ActivityCarDetailBinding
+    private lateinit var item: Car
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCarDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupView()
         loadItem()
-        //setupGoogleMap()
-
     }
 
     private fun loadItem() {
@@ -45,31 +41,24 @@ class CarDetailActivity : AppCompatActivity() {
                 when (result){
                     is Result.Error -> {}
                     is Result.Success -> {
-                        car = result.data
+                        item = result.data
                         handleSuccess()
                     }
                 }
             }
         }
     }
-    private fun setupView() {
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-        binding.toolbar.setNavigationOnClickListener { finish() }
-        binding.deleteCTA.setOnClickListener {
-            //deleteItem()
-        }
-        binding.editCTA.setOnClickListener {
-            //editItem()
-        }
-    }
+
     private fun handleSuccess() {
-        binding.model.text = "${car.value.name}"
-        binding.year.text = getString(R.string.year, car.value.year.toString())
-        binding.licence.setText(car.value.licence)
-        binding.image.loadUrl(car.value.imageUrl)
+        binding.name.text = item.name
+        binding.year.text = item.year
+        binding.license.setText(item.licence)
+        //binding.image.loadUrl(item.imageUrl)
         //loadItemLocationInGoogleMap()
+    }
+
+    private fun setupView() {
+    //binding.name.text = "Maria Aparecida"
     }
 
     companion object{

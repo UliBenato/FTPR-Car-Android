@@ -24,8 +24,8 @@ import androidx.core.content.FileProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.myapitest.databinding.ActivityNewCarBinding
+import com.example.myapitest.model.Car
 import com.example.myapitest.model.CarLocation
-import com.example.myapitest.model.CarValue
 import com.example.myapitest.services.Result
 import com.example.myapitest.services.RetrofitClient
 import com.example.myapitest.services.safeApiCall
@@ -211,7 +211,7 @@ class NewCarActivity : AppCompatActivity(), OnMapReadyCallback {
             val id = SecureRandom().nextInt().toString()
             val itemPosition = selectedMarker?.position?.let{
                 CarLocation(it.latitude, it.longitude)}
-            val carValue = CarValue(
+            val carValue = Car(
                 id,
                 binding.imageUrl.text.toString(),
                 binding.name.text.toString(),

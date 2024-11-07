@@ -35,9 +35,9 @@ class CarAdapter (
             holder.itemView.setOnClickListener{
                 carClickListener.invoke(item)
             }
-            holder.modelTextView.text = "${item.value.name}"
-            holder.yearTextView.text = holder.itemView.context.getString(R.string.year, item.value.year.toString())
-            holder.licenceTextView.text = item.value.licence
-            holder.imageView.loadUrl(item.value.imageUrl)
+            holder.modelTextView.setText(item.name)
+            holder.yearTextView.setText(item.year)
+            holder.licenceTextView.setText(item.licence)
+            holder.imageView.loadUrl(item.imageUrl)
         }
 }
