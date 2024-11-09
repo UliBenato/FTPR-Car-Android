@@ -1,8 +1,8 @@
-package com.example.myapitest.database
+package com.example.carApi.database
 
 import android.content.Context
 import androidx.room.Room
-import com.example.myapitest.AppDatabase
+import com.example.carApi.AppDatabase
 
 object DatabaseBuilder {
     private var instance: AppDatabase? = null

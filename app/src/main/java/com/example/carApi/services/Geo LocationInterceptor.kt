@@ -1,7 +1,7 @@
-package com.example.myapitest.services
+package com.example.carApi.services
 
 
-import com.example.myapitest.dao.CarLocationDao
+import com.example.carApi.dao.CarLocationDao
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Request

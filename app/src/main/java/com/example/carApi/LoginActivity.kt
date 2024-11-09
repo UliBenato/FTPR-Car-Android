@@ -1,4 +1,4 @@
-package com.example.myapitest
+package com.example.carApi
 
 import android.content.Context
 import android.content.Intent
@@ -6,13 +6,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.myapitest.databinding.ActivityLoginBinding
+import com.example.carApi.databinding.ActivityLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -42,11 +39,23 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         setupGoogleLogin()
         setupView()
+        verifyLoggedUser()
 
     }
+
+    private fun verifyLoggedUser() {
+        if (auth.currentUser != null){
+            navigateToMainActivity()
+        }
+    }
+
+    private fun navigateToMainActivity() {
+        startActivity(MainActivity.newIntent(this))
+    }
+
     private fun setupGoogleLogin() { //configura o login do google
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken("803329811406-7n52uaiti7gno9hin4mecgteakvjbo6p.apps.googleusercontent.com")
+            .requestIdToken("\n" + "1:1068726974009:android:2cb568702a3425a3b7ffe8")
             .requestEmail()
             .build()
         googleSignInClient = GoogleSignIn.getClient(this, gso)
@@ -61,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
 
             }catch (e: ApiException){
                 Log.e("LoginActivity", "Google sign in failed", e)
-                startActivity(MainActivity.newIntent(this))
+                navigateToMainActivity()
             }
         }
     }

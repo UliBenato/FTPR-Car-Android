@@ -1,4 +1,4 @@
-package com.example.myapitest
+package com.example.carApi
 
 import org.junit.Test
 

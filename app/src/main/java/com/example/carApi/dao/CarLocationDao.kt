@@ -1,9 +1,9 @@
-package com.example.myapitest.dao
+package com.example.carApi.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.myapitest.database.model.CarLocation
+import com.example.carApi.database.model.CarLocation
 
 @Dao
 interface CarLocationDao {

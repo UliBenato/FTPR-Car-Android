@@ -22,7 +22,7 @@
         android:id="@+id/name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Name"
+        android:hint="Car"
         android:layout_marginTop="12dp"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
@@ -42,21 +42,24 @@
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/license"
-        android:layout_width="60dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:layout_marginStart="12dp"
         android:hint="License"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/year"
+        app:layout_constraintEnd_toEndOf="@id/year"
         app:layout_constraintTop_toBottomOf="@id/year"
         android:inputType="number" />
 
     <ProgressBar
+        android:id="@+id/loadImageProgress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="@id/imageUrl"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintBottom_toTopOf="@id/takePicture"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/takePicture"
@@ -64,7 +67,8 @@
         android:layout_height="wrap_content"
         android:src="@android:drawable/ic_menu_camera"
         app:layout_constraintTop_toBottomOf="@id/imageUrl"
-        app:layout_constraintStart_toStartOf="@id/imageUrl"/>
+        app:layout_constraintStart_toStartOf="@id/imageUrl"
+        app:layout_constraintEnd_toEndOf="@id/imageUrl"/>
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/imageUrl"
@@ -83,11 +87,11 @@
         android:visibility="gone"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="12dp"
-        app:layout_constraintTop_toBottomOf="@id/imageUrl"
+        app:layout_constraintTop_toBottomOf="@id/takePicture"
         app:layout_constraintBottom_toTopOf="@id/saveCta"
         tools:visibility="visible">
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/newMap"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
@@ -96,6 +100,7 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <ImageButton
         android:id="@+id/saveCta"

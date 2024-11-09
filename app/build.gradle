@@ -7,11 +7,11 @@ plugins {
 
 
 android {
-    namespace 'com.example.myapitest'
+    namespace 'com.example.carApi'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.myapitest"
+        applicationId "com.example.carApi"
         minSdk 24
         targetSdk 34
         versionCode 1
@@ -95,6 +95,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-auth' // Certifique-se de usar a versão mais recente
     implementation 'com.google.android.gms:play-services-auth:21.2.0'
+
+    //Storage
+    implementation 'com.google.firebase:firebase-storage-ktx:21.0.1'
 
     // Room
     implementation "androidx.room:room-runtime:2.6.1"

@@ -1,4 +1,4 @@
-package com.example.myapitest.database.adapter
+package com.example.carApi.database.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapitest.R
-import com.example.myapitest.model.Car
-import com.example.myapitest.ui.loadUrl
+import com.example.carApi.R
+import com.example.carApi.model.Car
+import com.example.carApi.ui.loadUrl
 
 class CarAdapter (
     private val cars: List<Car>,

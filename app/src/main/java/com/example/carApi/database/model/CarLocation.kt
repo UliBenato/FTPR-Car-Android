@@ -1,4 +1,4 @@
-package com.example.myapitest.database.model
+package com.example.carApi.database.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

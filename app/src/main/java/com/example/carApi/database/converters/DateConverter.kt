@@ -1,4 +1,4 @@
-package com.example.myapitest.database.converters
+package com.example.carApi.database.converters
 
 import androidx.room.TypeConverter
 import java.util.Date

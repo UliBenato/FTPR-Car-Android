@@ -1,4 +1,4 @@
-package com.example.myapitest
+package com.example.carApi
 
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
@@ -16,14 +16,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.myapitest.database.DatabaseBuilder
-import com.example.myapitest.database.adapter.CarAdapter
-import com.example.myapitest.database.model.CarLocation
-import com.example.myapitest.databinding.ActivityMainBinding
-import com.example.myapitest.model.Car
-import com.example.myapitest.services.Result
-import com.example.myapitest.services.RetrofitClient
-import com.example.myapitest.services.safeApiCall
+import com.example.carApi.database.DatabaseBuilder
+import com.example.carApi.database.adapter.CarAdapter
+import com.example.carApi.database.model.CarLocation
+import com.example.carApi.databinding.ActivityMainBinding
+import com.example.carApi.model.Car
+import com.example.carApi.services.Result
+import com.example.carApi.services.RetrofitClient
+import com.example.carApi.services.safeApiCall
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
@@ -46,15 +46,6 @@ class MainActivity : AppCompatActivity() {
         setupView()
         //FirebaseAuth.getInstance()
 
-        // 2- Criar Opção de Logout no aplicativo
-
-        // 3- Integrar API REST /car no aplicativo
-        //      API será disponibilida no Github
-        //      JSON Necessário para salvar e exibir no aplicativo
-        //      O Image Url deve ser uma foto armazenada no Firebase Storage
-        //      { "id": "001", "imageUrl":"https://image", "year":"2020/2020", "name":"Gaspar", "licence":"ABC-1234", "place": {"lat": 0, "long": 0} }
-
-        // Opcionalmente trabalhar com o Google Maps ara enviar o place
     }
 
     override fun onResume() {

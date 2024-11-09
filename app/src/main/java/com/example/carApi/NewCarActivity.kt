@@ -1,4 +1,4 @@
-package com.example.myapitest
+package com.example.carApi
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -14,21 +14,18 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.myapitest.databinding.ActivityNewCarBinding
-import com.example.myapitest.model.Car
-import com.example.myapitest.model.CarLocation
-import com.example.myapitest.services.Result
-import com.example.myapitest.services.RetrofitClient
-import com.example.myapitest.services.safeApiCall
+import com.example.carApi.databinding.ActivityNewCarBinding
+import com.example.carApi.model.Car
+import com.example.carApi.model.CarLocation
+import com.example.carApi.services.Result
+import com.example.carApi.services.RetrofitClient
+import com.example.carApi.services.safeApiCall
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -50,19 +47,21 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.UUID
 
-class NewCarActivity : AppCompatActivity(), OnMapReadyCallback {
+class NewCarActivity : AppCompatActivity(), OnMapReadyCallback{
+
+
     private lateinit var binding: ActivityNewCarBinding
     private var selectedMarker: Marker? = null
     private lateinit var imageUri: Uri
     private lateinit var mMap: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private var imageFile:File? = null
 
     private val cameraLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ){result ->
         if(result.resultCode == Activity.RESULT_OK){
-            val imageBitmap = BitmapFactory.decodeFile(imageUri.path)
-            uploadImageToFirebase(imageBitmap)
+            binding.imageUrl.setText("Imagem obtida")
         }
     }
 
@@ -191,33 +190,45 @@ class NewCarActivity : AppCompatActivity(), OnMapReadyCallback {
         val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
 
         // Cria um arquivo de imagem
-        val imageFile: File = File.createTempFile(
+      imageFile = File.createTempFile(
             imageFileName,  /* prefix */
             ".jpg",         /* suffix */
             storageDir      /* directory */
         )
-
         // Retorna o URI para o arquivo
         return FileProvider.getUriForFile(
             this,  // Contexto
             "${packageName}.fileprovider", // Autoridade
-            imageFile // O arquivo
+            imageFile!! // O arquivo
         )
     }
     private fun save() {
         if (!validateForm()) return
-        //uploadImageToFirebase()
+        val imageBitmap = BitmapFactory.decodeFile(imageFile!!.path)
+        uploadImageToFirebase(imageBitmap)
+    }
+
+    private fun saveData(imageUrl: String) {
+
+        val itemPosition = selectedMarker?.position?.let{
+            CarLocation(it.latitude, it.longitude)}
+        var positionIfNull = CarLocation(0.0, 0.0)
+        var position: CarLocation?
+        if (itemPosition == null){
+            position = positionIfNull
+        } else{
+            position = itemPosition
+
+        }
         CoroutineScope(Dispatchers.IO).launch {
             val id = SecureRandom().nextInt().toString()
-            val itemPosition = selectedMarker?.position?.let{
-                CarLocation(it.latitude, it.longitude)}
             val carValue = Car(
                 id,
-                binding.imageUrl.text.toString(),
-                binding.name.text.toString(),
+                imageUrl,
                 binding.year.text.toString(),
+                binding.name.text.toString(),
                 binding.license.text.toString(),
-                place = itemPosition
+                place = position
             )
             val result = safeApiCall { RetrofitClient.apiService.addItem(carValue) }
             withContext(Dispatchers.Main) {
@@ -236,8 +247,7 @@ class NewCarActivity : AppCompatActivity(), OnMapReadyCallback {
                             Toast.LENGTH_SHORT
                         ).show()
                         finish()
-                }
-
+                    }
 
                 }
             }
@@ -255,14 +265,24 @@ class NewCarActivity : AppCompatActivity(), OnMapReadyCallback {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val data = baos.toByteArray()
 
+        binding.loadImageProgress.visibility = View.VISIBLE
+        binding.takePicture.isEnabled = false
+
         val uploadTask = imagesRef.putBytes(data)
-        uploadTask.addOnFailureListener{
-            Toast.makeText(this, "Fala ao realizar upload", Toast.LENGTH_SHORT).show()
-        }.addOnSuccessListener {
-            imagesRef.downloadUrl.addOnSuccessListener { uri ->
+        .addOnFailureListener{
+            Toast.makeText(this, "Falha ao realizar upload", Toast.LENGTH_SHORT).show()
+            binding.loadImageProgress.visibility = View.GONE
+        }
+        .addOnSuccessListener {
+                binding.loadImageProgress.visibility = View.GONE
+                binding.takePicture.isEnabled = true
+                imagesRef.downloadUrl.addOnSuccessListener { uri ->
                 binding.imageUrl.setText(uri.toString())
+                    binding.takePicture.isEnabled = true
+                    saveData(uri.toString())
             }
         }
+
 
 
     }
@@ -281,7 +301,7 @@ class NewCarActivity : AppCompatActivity(), OnMapReadyCallback {
             return false
         }
         if (binding.imageUrl.text.toString().isBlank()) {
-            Toast.makeText(this, getString(R.string.error_validate_form, "Image Url"), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.error_validate_foto), Toast.LENGTH_SHORT).show()
             return false
         }
         return true

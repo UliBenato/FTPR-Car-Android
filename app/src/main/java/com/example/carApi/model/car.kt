@@ -1,4 +1,10 @@
-package com.example.myapitest.model
+package com.example.carApi.model
+
+data class CarValue(
+    val id: String,
+    val value: Car
+)
+
 
 data class Car(
     val id: String,

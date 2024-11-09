@@ -1,14 +1,11 @@
-package com.example.myapitest.services
+package com.example.carApi.services
 
-import com.example.myapitest.database.DatabaseBuilder
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 
-    private const val BASE_URL = "http://192.168.1.45:3000/" //10.0.2.2 ou ip 192.168.1.45
+    private const val BASE_URL = "http://192.168.1.16:3000/" //10.0.2.2 ou ip 192.168.1.45
     //É o endereço usado para acessar o localhost no emulador android - arrumar no xml tb - arquivo de permissão
 
     /*private val loggingInterceptor = HttpLoggingInterceptor().apply {

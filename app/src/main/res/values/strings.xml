@@ -12,4 +12,9 @@
     <string name="success_create">Item %1$s criado com sucesso!!</string>
     <string name="logout">Logout</string>
     <string name="unknow_error">Erro</string>
+    <string name="error_delete">Erro ao excluir registro!</string>
+    <string name="success_delete">Registro excluído com sucesso!</string>
+    <string name="error_editar">Erro ao editar!</string>
+    <string name="success_save">Carro editado com sucesso!</string>
+    <string name="error_validate_foto">Por favor, tire uma foto!</string>
 </resources>
