@@ -37,7 +37,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCzuUEzN19p0KZdBTMUGby3YJBrKBqHLUA" />
+            android:value="${API}"/>
 
         <activity
             android:name=".CarDetailActivity"

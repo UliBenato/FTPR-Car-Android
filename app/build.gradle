@@ -5,10 +5,19 @@ plugins {
     id("com.google.gms.google-services")
 }
 
+def propriedades = new Properties()
+propriedades.load(new FileInputStream(rootProject.file("local.properties")))
 
 android {
     namespace 'com.example.carApi'
     compileSdk 34
+
+    defaultConfig {
+        if (propriedades.getProperty("API") == null) {
+            throw new GradleException("A chave 'API' não foi definida no local.properties.")
+        }
+        manifestPlaceholders = [API: propriedades.getProperty("API")]
+    }
 
     defaultConfig {
         applicationId "com.example.carApi"
